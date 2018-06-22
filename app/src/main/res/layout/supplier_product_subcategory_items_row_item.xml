@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:id="@+id/card_view"
+    android:layout_margin="5dp"
+    android:background="@color/colorWhite"
+    card_view:cardBackgroundColor="@color/colorWhite"
+    card_view:cardElevation="2dp"
+    card_view:contentPadding="6dp"
+    android:foreground="?selectableItemBackground"
+    android:clickable="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="40">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="25"
+            android:background="@drawable/rectangle_left_right">
+
+            <TextView
+                android:id="@+id/supplier_product_subcategory_item_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text='Магазин "Нур Астана"'
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="19sp"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/supplier_product_subcategory_item_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:text="1600тг"
+                android:textColor="@color/colorRedPrice"
+                android:textSize="18sp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/supplier_goods_item_name" />
+
+        </android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:layout_weight="15"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="16dp"
+            android:weightSum="25">
+
+            <ImageView
+                android:id="@+id/supplier_product_subcategory_item_sign_minus"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                card_view:srcCompat="@mipmap/path29" />
+
+            <TextView
+                android:id="@+id/supplier_product_subcategory_item_amount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/colorBlack" />
+
+            <ImageView
+                android:id="@+id/supplier_product_subcategory_item_sign_plus"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                card_view:srcCompat="@mipmap/path30" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_weight="20"
+                android:layout_width="0dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/supplier_product_subcategory_item_to_basket"
+                    android:layout_width="101dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/shape_go_basket"
+                    android:gravity="center"
+                    android:text="В корзину"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15sp"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintHorizontal_bias="1.0"
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    card_view:layout_constraintVertical_bias="0.0" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

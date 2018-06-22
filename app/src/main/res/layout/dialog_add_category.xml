@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_for_dialog_registration"
+        android:weightSum="15">
+        <TextView
+            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Новая категория"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"/>
+
+        <EditText
+            android:id="@+id/dialog_add_category_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:hint="Введите имя категории"
+            android:background="@drawable/rectangle_left_top_right"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/dialog_add_category_add"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:text="Добавить"
+            android:textColor="@color/colorBlueLogin"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center" />
+
+    </LinearLayout>
+</RelativeLayout>

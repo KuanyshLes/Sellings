@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/supplier_nav_main"
+            android:icon="@mipmap/ic_store_24px"
+            android:title="Главная" />
+        <item
+            android:id="@+id/supplier_nav_orders"
+            android:icon="@mipmap/ic_receipt_24px"
+            android:title="Мой заказы" />
+        <item
+            android:id="@+id/supplier_nav_history_orders"
+            android:icon="@mipmap/ic_autorenew_24px"
+            android:title="История заказов" />
+        <item
+            android:id="@+id/supplier_nav_consignation"
+            android:icon="@mipmap/ic_account_balance_wallet_24px"
+            android:title="Консигнация" />
+        <item
+            android:id="@+id/supplier_nav_profile"
+            android:icon="@mipmap/ic_settings_24px"
+            android:title="Профиль" />
+        <item
+            android:id="@+id/supplier_nav_goods"
+            android:icon="@mipmap/ic_view_list_24px"
+            android:title="Товары" />
+    </group>
+
+
+</menu>

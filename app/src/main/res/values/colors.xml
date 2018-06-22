@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1a66ff</color>
+    <color name="colorPrimaryDark">#1a66ff</color>
+    <color name="colorAccent">#1a66ff</color>
+    <color name="colorBlueLogin">#1a66ff</color>
+    <color name="colorNavHeader">#0946bf</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlueAnother">#2f67ff</color>
+    <color name="colorGrey">#636262</color>
+    <color name="colorMoreGrey">#232222</color>
+    <color name="colorBlack">#1b1b1b</color>
+    <color name="colorOrderStatus">#0ee4ae</color>
+    <color name="colorOrderLightGreen">#6ce24b</color>
+    <color name="colorRedPrice">#e42b0e</color>
+    <color name="colorStatusConfirmed">#e42b0e</color>
+    <color name="colorMoreRed">#dc2528</color>
+
+
+</resources>

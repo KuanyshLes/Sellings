@@ -1,0 +1,220 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    tools:context="kz.production.kuanysh.sellings.ui.content_owner.fragments.main.MainFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/supplier_main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorBlueLogin"
+            >
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/supplier_statistics_toolbar_drawer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:src="@mipmap/hori"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/supplier_statistics_toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Главная"
+                    android:textColor="@android:color/white"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.433"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.515" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+
+            android:layout_below="@id/supplier_main_toolbar"
+            android:background="@color/colorWhite"
+            android:weightSum="21">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:foreground="?selectableItemBackground"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0.0px"
+                app:cardPreventCornerOverlap="false"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="20">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:text="Количество заказов"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/supplier_statistics_order_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3.5"
+                        android:gravity="top|center"
+                        android:text="Апрель 2018 - Май 2018"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/supplier_statistics_order_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="11"
+                        android:gravity="center"
+                        android:text="125"
+                        android:textSize="75sp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                        android:textColor="@color/colorBlueLogin" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:foreground="?selectableItemBackground"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0.0px"
+                app:cardPreventCornerOverlap="false"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="20">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:text="Оборот за текущий месяц"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/supplier_statistics_income_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3.5"
+                        android:gravity="top|center"
+                        android:text="Апрель 2018 - Май 2018"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/supplier_statistics_income_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="11"
+                        android:gravity="center"
+                        android:text="1.2 m"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                        android:textColor="@color/colorBlueLogin"
+                        android:textSize="75sp" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:foreground="?selectableItemBackground"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0.0px"
+                app:cardPreventCornerOverlap="false"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="20">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:text="Задолжники"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/supplier_statistics_debtors_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3.5"
+                        android:gravity="top|center"
+                        android:text="Апрель 2018 - Май 2018"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/supplier_statistics_debtors_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="11"
+                        android:gravity="center"
+                        android:text="10"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                        android:textColor="@color/colorBlueLogin"
+                        android:textSize="75sp" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

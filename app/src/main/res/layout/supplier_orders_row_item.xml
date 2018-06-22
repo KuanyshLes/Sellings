@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/card_view"
+    android:layout_margin="5dp"
+    android:background="@color/colorWhite"
+    card_view:cardBackgroundColor="#fafafa"
+    card_view:cardElevation="3dp"
+    card_view:contentPadding="6dp"
+    android:foreground="?selectableItemBackground"
+    android:clickable="true">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/supplier_order_item_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="top|center"
+            android:layout_weight="2.5"
+            android:src="@mipmap/group52" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="7.5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingLeft="8dp"
+            android:weightSum="8">
+
+            <TextView
+                android:id="@+id/supplier_order_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5"
+                android:text="Арман Трендс Конфет"
+                android:textColor="#161616"
+                android:textSize="20sp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:weightSum="5">
+                <TextView
+                    android:id="@+id/supplier_order_item_time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="21.01.2018" />
+                <TextView
+                    android:id="@+id/supplier_order_item_status"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:gravity="left"
+                    android:text="Ожидает"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1.8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:weightSum="100">
+
+                <ImageView
+                    android:id="@+id/supplier_item_image"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10" />
+                <TextView
+                    android:id="@+id/supplier_time"
+                    android:layout_weight="255"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:paddingLeft="8dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1.8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:weightSum="100">
+                <ImageView
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/ic_room_24px"/>
+
+                <TextView
+                    android:id="@+id/supplier_order_item_address"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="95"
+                    android:paddingLeft="8dp"
+                    android:text="Ул.Байтурсынулы 56а" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

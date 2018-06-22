@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".ui.welcomepart.registration.RegistrationConfirmationActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorBlueLogin"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="202dp"
+            android:weightSum="8"
+            android:paddingLeft="35dp">
+            <TextView
+                android:layout_weight="4"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:gravity="left|bottom"
+                android:text="КОД ПОДТВЕРЖДЕНИЯ"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_weight="4"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:gravity="left|top"
+                android:paddingTop="10dp"
+                android:paddingRight="45dp"
+                android:text="Напишите полученный код"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="45dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_for_credentials_edittext"
+        android:weightSum="15"
+        app:layout_constraintBottom_toTopOf="@+id/go_to_full_registration"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <EditText
+            android:id="@+id/registration_confirm_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:background="@drawable/shape_rectangle_right"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberPassword"
+            android:paddingLeft="10dp"
+            android:text="+7 (776) 556 6321"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:background="@drawable/shape_rectangle_left"
+            android:gravity="right|center"
+            android:paddingRight="10dp"
+            android:text="Код подтверждения"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/go_to_full_registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="109dp"
+        android:background="@drawable/shape_for_confirm_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Далее"
+        android:textColor="@color/colorWhite"
+
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
+
+</android.support.constraint.ConstraintLayout>
