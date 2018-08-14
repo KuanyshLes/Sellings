@@ -52,12 +52,11 @@
             android:layout_height="match_parent"
             android:layout_weight="9"
             android:background="@drawable/shape_rectangle_right"
-            android:ems="10"
             android:gravity="center"
-            android:inputType="phone"
+            android:inputType="number"
             android:paddingLeft="10dp"
-            android:text="+7 (776) 556 6321"
-            android:textSize="20sp" />
+            android:text=""
+            android:textSize="17sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -67,7 +66,7 @@
             android:gravity="right|center"
             android:paddingRight="10dp"
             android:text="Номер телефона"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,24 +88,24 @@
             android:id="@+id/login_password"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="9"
+            android:layout_weight="10"
             android:background="@drawable/shape_rectangle_right"
             android:ems="10"
             android:gravity="center"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
-            android:text="+7 (776) 556 6321"
+            android:text=""
             android:textSize="20sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:background="@drawable/shape_rectangle_left"
             android:gravity="right|center"
             android:paddingRight="10dp"
             android:text="Пароль"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <TextView

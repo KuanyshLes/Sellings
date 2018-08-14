@@ -9,7 +9,7 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
 import kz.production.kuanysh.sellings.R;
-import kz.production.kuanysh.sellings.model.SubCategory;
+import kz.production.kuanysh.sellings.data.model.SubCategory;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
@@ -31,6 +31,13 @@ public class SubCategoryViewHolder extends GroupViewHolder {
     public void setGenreTitle(ExpandableGroup subcategory) {
         if (subcategory instanceof SubCategory) {
             SubCategoryName.setText(subcategory.getTitle());
+            if (subcategory.getItemCount()>0) {
+                arrow.setVisibility(View.VISIBLE);
+                arrow.setEnabled(true);
+            }else{
+                arrow.setVisibility(View.INVISIBLE);
+                arrow.setEnabled(false);
+            }
             }
 
     }

@@ -31,7 +31,7 @@
                     android:id="@+id/supplier_subcategory_toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Категории"
+                    android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -54,12 +54,23 @@
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.Toolbar>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/supplier_subcategory_list"
+        <FrameLayout
+            android:layout_below="@id/supplier_main_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/supplier_main_toolbar">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/supplier_subcategory_list"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+            <include
+                android:id="@+id/id_nullable"
+                layout="@layout/layout_null_factory"
+                android:visibility="visible">
+            </include>
+        </FrameLayout>
+
 
 
 

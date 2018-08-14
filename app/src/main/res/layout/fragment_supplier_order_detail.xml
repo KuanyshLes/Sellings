@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context="kz.production.kuanysh.sellings.ui.content_suppiler.fragments.order.SupplierOrderDetailFragment">
+    tools:context="kz.production.kuanysh.sellings.ui.content_suppiler.fragments.order.item.SupplierOrderDetailFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,12 +58,10 @@
                 android:id="@+id/supplier_order_detail_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Магазин Нур Астана"
+                android:layout_marginLeft="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="20sp"
+                android:textSize="21sp"
                 app:layout_constraintBottom_toTopOf="@+id/supplier_order_detail_consignment"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -75,9 +73,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Принять"
-                android:textSize="16sp"
                 android:gravity="center"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/supplier_order_detail_consignment"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -86,10 +83,8 @@
                 android:id="@+id/supplier_order_detail_consignment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="5dp"
-                android:text="Консигнация"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/supplier_order_detail_cash"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,10 +95,9 @@
                 android:id="@+id/supplier_order_detail_cash"
                 android:layout_width="match_parent"
                 android:layout_height="21dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="5dp"
-                android:text="Наличный расчет"
                 app:layout_constraintBottom_toTopOf="@+id/supplier_order_detail_list"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/supplier_order_detail_consignment" />
@@ -134,28 +128,33 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/supplier_order_detail_list">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="7.5" />
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3.5"
-                    android:gravity="right"
-                    android:text="Итого:"
-                    android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:text="Итого:"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/supplier_order_detail_all_price"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/supplier_order_detail_all_price"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="4"
-                    android:gravity="right"
-                    android:text="3200тг"
-                    android:textColor="@color/colorMoreGrey"
-                    android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/supplier_order_detail_all_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/colorMoreGrey"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+
 
             </LinearLayout>
 
@@ -163,7 +162,7 @@
                 android:id="@+id/linearLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
@@ -179,6 +178,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4.5"
+                    android:enabled="false"
+                    android:visibility="invisible"
                     android:background="@drawable/shape_for_button_cancel_white"
                     android:text="Отменить"
                     android:textColor="@color/colorGrey"
@@ -194,6 +195,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4.5"
+                    android:visibility="invisible"
+                    android:enabled="false"
                     android:background="@drawable/shape_for_confirm_button"
                     android:text="Принять"
                     android:textColor="@color/colorWhite"

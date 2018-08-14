@@ -1,6 +1,7 @@
 package kz.production.kuanysh.sellings.ui.content_owner.utils.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,26 +9,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kz.production.kuanysh.sellings.R;
-import kz.production.kuanysh.sellings.model.OrderItem;
+import kz.production.kuanysh.sellings.data.model.OrderItem;
+import kz.production.kuanysh.sellings.data.network.model.owner.orderlist.Result;
+import kz.production.kuanysh.sellings.ui.content_owner.utils.Colors;
 import kz.production.kuanysh.sellings.ui.content_owner.utils.Listener;
+import kz.production.kuanysh.sellings.utils.AppConstants;
 
 /**
  * Created by User on 10.06.2018.
  */
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
-    private List<OrderItem> orders;
-    private Context context;
+    private List<Result> orders;
     private Listener listener;
 
 
 
-    public OrdersAdapter(List<OrderItem> orders, Context context) {
+    public OrdersAdapter(List<Result> orders) {
         this.orders= orders;
-        this.context = context;
     }
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
@@ -59,10 +64,20 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         TextView status= (TextView) cardView.findViewById(R.id.order_status);
 
 
-        number.setText("Заказ №"+orders.get(i).getNumber().toString());
-        owner.setText(orders.get(i).getOwner());
-        time.setText(orders.get(i).getTime());
-        status.setText(orders.get(i).getStatus());
+        number.setText("Заказ №"+orders.get(i).getId());
+        owner.setText(orders.get(i).getProviderName().replace("\"",""));
+        time.setText(orders.get(i).getUpdatedAt().replace("\"",""));
+        if(Integer.parseInt(orders.get(i).getStatusId().toString())== AppConstants.SUPPLIER_ORDER_STATUS_CONFIRM){
+            status.setText(AppConstants.OWNER_ORDER_STATUS_CONFIRM_TEXT);
+            status.setTextColor(Color.parseColor(Colors.CONFIRMED_GREEN));
+        }else if(Integer.parseInt(orders.get(i).getStatusId().toString())== AppConstants.SUPPLIER_ORDER_STATUS_CANCELL){
+            status.setText(AppConstants.OWNER_ORDER_STATUS_CANCELL_TEXT);
+            status.setTextColor(Color.parseColor(Colors.CANCELLED_RED));
+        }else if(Integer.parseInt(orders.get(i).getStatusId().toString())== AppConstants.SUPPLIER_ORDER_STATUS_WAITING){
+            status.setText(AppConstants.OWNER_ORDER_STATUS_WAITING_TEXT);
+            status.setTextColor(Color.parseColor(Colors.WAITING));
+        }
+
 
 
         cardView.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +92,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return orders.size();
+    }
+
+    public void addItems(List<Result> list){
+        orders.addAll(list);
+        notifyDataSetChanged();
+
     }
 
 

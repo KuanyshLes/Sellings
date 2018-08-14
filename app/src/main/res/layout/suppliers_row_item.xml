@@ -18,12 +18,15 @@
         android:layout_height="match_parent"
         android:weightSum="10">
 
-        <ImageView
-            android:id="@+id/product_image"
+        <carbon.widget.ImageView
+            android:id="@+id/supplier_image"
             android:layout_width="0dp"
+            card_view:carbon_cornerRadius="4dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.5"
             android:layout_gravity="top|center"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_weight="2.5"
             android:src="@mipmap/group52" />
         <LinearLayout
             android:orientation="vertical"

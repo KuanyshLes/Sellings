@@ -1,33 +1,37 @@
 package kz.production.kuanysh.sellings.ui.content_owner.utils.adapters;
 
 
-import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 import kz.production.kuanysh.sellings.R;
-import kz.production.kuanysh.sellings.model.SupplierItem;
+import kz.production.kuanysh.sellings.data.network.model.owner.all_provider.Provider;
+import kz.production.kuanysh.sellings.ui.content_owner.fragments.main.main.OwnerSupplierItemFragment;
 import kz.production.kuanysh.sellings.ui.content_owner.utils.Listener;
 
 
 public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHolder> {
-    private List<SupplierItem> supplierItemList;
-    private Context context;
+    private List<Provider> supplierItemList;
+    private OwnerSupplierItemFragment context;
     private Listener listener;
 
 
-
-    public SupplierAdapter(List<SupplierItem> supplierItemList, Context context) {
-        this.supplierItemList = supplierItemList;
+    public SupplierAdapter(ArrayList<Provider> providers, OwnerSupplierItemFragment context) {
         this.context = context;
+        this.supplierItemList=providers;
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
@@ -57,11 +61,27 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         TextView category = (TextView) cardView.findViewById(R.id.supplier_category);
         TextView workingTime = (TextView) cardView.findViewById(R.id.supplier_time);
         TextView address = (TextView) cardView.findViewById(R.id.supplier_address);
+        ImageView imageView=(ImageView)cardView.findViewById(R.id.supplier_image);
 
-        name.setText("\""+supplierItemList.get(i).getName()+"\"");
-        category.setText(supplierItemList.get(i).getCategory());
-        workingTime.setText(supplierItemList.get(i).getWorkingTime());
-        address.setText(supplierItemList.get(i).getAddress());
+        String categoryString="";
+        name.setText(supplierItemList.get(i).getTitle().replace("\"",""));
+        for(int j=0;j<supplierItemList.get(i).getCategories().size();j++){
+            categoryString+=supplierItemList.get(i).getCategories().get(j).getTitle()+",";
+            category.setText(categoryString.toString());
+        }
+        workingTime.setText(supplierItemList.get(i).getFromHours().replace("\"","")+"-"+
+                supplierItemList.get(i).getToHours().replace("\"",""));
+        address.setText(supplierItemList.get(i).getAddress().replace("\"",""));
+        if(categoryString.length()!=0){
+            category.setText(categoryString.substring(0,categoryString.length()-1));
+        }
+        if(category.getText().length()>25){
+            category.setText(categoryString.substring(0,25)+"...");
+        }
+
+        Glide.with(imageView.getContext())
+                .load(supplierItemList.get(i).getImage())
+                .into(imageView);
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +96,12 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
     @Override
     public int getItemCount() {
         return supplierItemList.size();
+    }
+
+    public void addItems(List<Provider> providers) {
+        //chat_item.clear();
+        supplierItemList.addAll(providers);
+        notifyDataSetChanged();
     }
 
 

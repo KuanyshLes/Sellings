@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorWhite"
-    tools:context=".ui.welcomepart.registration.SupplierRegistrationActivity">
+    tools:context=".ui.welcomepart.registration.supplier.SupplierRegistrationActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -14,17 +14,34 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:weightSum="15">
-        <ImageView
-            app:srcCompat="@mipmap/group52"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_weight="2.5"
+            android:weightSum="9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <View
+                android:layout_weight="3.5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+            </View>
+            <ImageView
+                android:id="@+id/supplier_registration_image"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_weight="2"
+                app:srcCompat="@mipmap/group52" />
+        </LinearLayout>
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="12"
+            android:layout_weight="10.8"
             android:layout_marginTop="15dp"
             android:weightSum="7">
 
@@ -164,6 +181,7 @@
                 android:id="@+id/supplier_registration_password"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="3dp"
                 android:layout_weight="1">
 
                 <android.support.design.widget.TextInputEditText

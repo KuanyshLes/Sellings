@@ -45,14 +45,30 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/supplier_сonsignment_recycler"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/supplier_main_toolbar"
-            android:layout_margin="8dp">
 
-        </android.support.v7.widget.RecyclerView>
+            android:layout_below="@id/supplier_main_toolbar"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/supplier_сonsignment_recycler"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <include
+                android:id="@+id/id_nullable"
+                layout="@layout/layout_null_factory"
+                android:visibility="visible">
+
+            </include>
+
+        </FrameLayout>
+
+
 
     </RelativeLayout>
 

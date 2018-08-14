@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="100dp"
     android:id="@+id/card_view"
     android:layout_margin="5dp"
     android:background="@color/colorWhite"
@@ -18,11 +18,15 @@
         android:layout_height="match_parent"
         android:weightSum="10">
 
-        <ImageView
+        <carbon.widget.ImageView
             android:id="@+id/supplier_consignment_item_image"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="top|center"
+            android:adjustViewBounds="false"
+            android:scaleType="centerCrop"
+            android:layout_margin="3dp"
+            card_view:carbon_cornerRadius="4dp"
             android:layout_weight="2.5"
             android:src="@mipmap/group52" />
         <LinearLayout
@@ -38,10 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3.0"
-                android:gravity="left|bottom"
-                android:text="ИП Арман Трендс Конфет"
+                android:gravity="left|center"
+                android:text="Apple"
                 android:textColor="#161616"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_weight="2.3"

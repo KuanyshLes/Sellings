@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="115dp"
+    android:layout_height="120dp"
     android:id="@+id/card_view"
     android:layout_margin="5dp"
     android:background="@color/colorWhite"
@@ -21,7 +21,7 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="20"
+            android:layout_weight="19.5"
             android:background="@drawable/rectangle_left_right">
 
             <TextView
@@ -62,10 +62,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="4dp"
-            android:layout_weight="5"
+            android:layout_weight="5.5"
+            android:layout_gravity="center"
             android:gravity="center_vertical"
             android:text="Получен"
-            android:textColor="@color/colorOrderStatus"
             android:textSize="17sp" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

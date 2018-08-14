@@ -1,10 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context="kz.production.kuanysh.sellings.ui.content_owner.fragments.main.MainFragment">
+    tools:context="kz.production.kuanysh.sellings.ui.content_owner.fragments.main.main.OwnerSupplierItemFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,190 +59,169 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_below="@id/main_toolbar"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:scrollbars="vertical">
+            android:weightSum="25">
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="3dp"
-                android:src="@mipmap/photo"
-                app:layout_constraintBottom_toTopOf="@+id/profile_radiogroup"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="3.8"
+                android:weightSum="10"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <View
+                    android:layout_weight="3.9"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                </View>
+                <carbon.widget.ImageView
+                    android:layout_weight="2.2"
+                    android:id="@+id/owner_profile_photoimage"
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:scaleType="centerCrop"
+                    app:carbon_cornerRadius="4dp"
+                    android:src="@drawable/profile_picture"/>
+            </LinearLayout>
 
             <RadioGroup
                 android:id="@+id/profile_radiogroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
-                android:weightSum="30"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2">
+                android:layout_weight="1.8"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:weightSum="15">
                 <RadioButton
-                    android:id="@+id/profile_phys"
+                    android:id="@+id/owner_profile_phys"
+                    android:layout_weight="5"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
                     android:text="Физ.лицо"
-                    android:layout_weight="18"/>
-
-                <RadioButton
-                    android:id="@+id/profile_lawyer"
+                    android:layout_height="match_parent" />
+                <View
+                    android:layout_weight="5"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_height="match_parent">
+
+                </View>
+                <RadioButton
+                    android:id="@+id/owner_profile_lawyer"
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
                     android:text="Юр.лицо"
-                    android:layout_weight="12"/>
+                    android:layout_height="match_parent" />
+
             </RadioGroup>
-
             <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
                 android:id="@+id/profile_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/profile_iin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_radiogroup">
-
-                <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+                <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Название" />
+                    android:layout_height="match_parent"
+                    android:hint="Название"/>
             </android.support.design.widget.TextInputLayout>
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/profile_iin"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/profile_place"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name">
-
-                <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+                <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="ИИН/БИН" />
+                    android:layout_height="match_parent"
+                    android:hint="ИИН/БИН"
+                    android:inputType="number"/>
             </android.support.design.widget.TextInputLayout>
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/profile_place"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/profile_address"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_iin">
-
-                <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+                <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Район" />
+                    android:layout_height="match_parent"
+                    android:hint="Район"/>
             </android.support.design.widget.TextInputLayout>
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/profile_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/supplier_profile_card_phone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_place">
-
-                <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+                <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Адрес" />
+                    android:layout_height="match_parent"
+                    android:hint="Адрес"/>
             </android.support.design.widget.TextInputLayout>
-
             <android.support.v7.widget.CardView
                 android:id="@+id/supplier_profile_card_phone"
-                android:layout_width="0dp"
-                android:layout_height="28dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.1"
                 android:layout_marginBottom="5dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/shape_for_credentials_edittext"
                 app:cardBackgroundColor="@color/colorWhite"
-                app:cardElevation="1dp"
-                app:layout_constraintBottom_toTopOf="@+id/supplier_profile_card_password"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_address">
+                app:cardElevation="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:weightSum="15">
 
                     <TextView
                         android:id="@+id/profile_phone_number"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="14"
                         android:paddingLeft="15dp"
+                        android:gravity="center|left"
                         android:text="+7 (777) 523 3365"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="18dp"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:src="@mipmap/ic_chevron_right_1" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
             <android.support.v7.widget.CardView
                 android:id="@+id/supplier_profile_card_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="57dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_height="0dp"
+                android:layout_weight="2.1"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/shape_for_credentials_edittext"
                 app:cardBackgroundColor="@color/colorWhite"
-                app:cardElevation="1dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supplier_profile_card_phone">
+                app:cardElevation="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:weightSum="15">
 
                     <TextView
                         android:id="@+id/profile_change_password"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="14"
+                        android:gravity="center|left"
                         android:paddingLeft="15dp"
                         android:text="Сменить пароль"
                         android:textColor="@color/colorBlack"
@@ -249,30 +229,50 @@
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="18dp"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:src="@mipmap/ic_chevron_right_1" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
             <Button
                 android:id="@+id/profile_save_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
+                android:layout_height="0dp"
+                android:layout_weight="2.5"
+                android:textSize="18sp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/shape_for_confirm_button"
                 android:text="Сохранить"
                 android:textColor="@color/colorWhite"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supplier_profile_card_password"
-                app:layout_constraintVertical_bias="0.39999998" />
-        </android.support.constraint.ConstraintLayout>
+                android:visibility="gone" />
+            <android.support.v7.widget.CardView
+                android:id="@+id/owner_card_logout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.3"
+                android:visibility="visible"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_for_credentials_edittext"
+                app:cardBackgroundColor="@color/colorWhite"
+                app:cardElevation="1dp">
+
+                <TextView
+                    android:id="@+id/owner_profile_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Выход"
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="left|center"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorRedPrice"/>
+
+            </android.support.v7.widget.CardView>
+
+
+
+        </LinearLayout>
     </RelativeLayout>
 
 </FrameLayout>

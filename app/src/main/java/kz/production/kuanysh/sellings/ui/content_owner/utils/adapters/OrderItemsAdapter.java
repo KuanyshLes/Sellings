@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kz.production.kuanysh.sellings.R;
-import kz.production.kuanysh.sellings.model.Product;
+import kz.production.kuanysh.sellings.data.model.Product;
+import kz.production.kuanysh.sellings.data.network.model.owner.orderdetail.Result;
 import kz.production.kuanysh.sellings.ui.content_owner.utils.Listener;
 
 /**
@@ -19,16 +21,15 @@ import kz.production.kuanysh.sellings.ui.content_owner.utils.Listener;
  */
 
 public class OrderItemsAdapter extends RecyclerView.Adapter<OrderItemsAdapter.ViewHolder> {
-    private List<Product> products;
-    private Context context;
+    private ArrayList<kz.production.kuanysh.sellings.data.network.model.owner.orderdetail.Product> products;
     private Listener listener;
+    Context mContext;
 
 
-
-    public OrderItemsAdapter(List<Product> products, Context context) {
+    public OrderItemsAdapter(ArrayList<kz.production.kuanysh.sellings.data.network.model.owner.orderdetail.Product> products) {
         this.products = products;
-        this.context = context;
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
@@ -58,8 +59,8 @@ public class OrderItemsAdapter extends RecyclerView.Adapter<OrderItemsAdapter.Vi
         TextView amount = (TextView) cardView.findViewById(R.id.detail_product_amount);
         TextView price= (TextView) cardView.findViewById(R.id.detail_product_price);
 
-        name.setText(products.get(i).getName().toString());
-        amount.setText(products.get(i).getCount()+"");
+        name.setText(products.get(i).getTitle().toString());
+        amount.setText(products.get(i).getNumberOfStock()+"");
         price.setText(products.get(i).getPrice()+"тг");
 
         cardView.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +76,13 @@ public class OrderItemsAdapter extends RecyclerView.Adapter<OrderItemsAdapter.Vi
     @Override
     public int getItemCount() {
         return products.size();
+    }
+    public void addItems(List<kz.production.kuanysh.sellings.data.network.model.owner.orderdetail.Product> list){
+        products.addAll(list);
+        notifyDataSetChanged();
+    }
+    public void addContext(Context context){
+        mContext=context;
     }
 
 

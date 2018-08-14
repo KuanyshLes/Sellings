@@ -30,10 +30,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/basket_toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Корзина"
+                    android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -46,19 +46,20 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:weightSum="20"
             android:layout_below="@id/main_toolbar">
 
-
             <TextView
+                android:layout_weight="1.8"
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginLeft="18dp"
+                android:layout_height="0dp"
+                android:gravity="left|center"
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="Мин.заказ 5000тг"
                 android:textSize="18sp"
@@ -67,37 +68,74 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:id="@+id/basket_consignation"
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_weight="12.2"
+                android:id="@+id/basket_items"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="5dp"
-                android:text="Консигнация"
-                app:layout_constraintBottom_toTopOf="@+id/textView7"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/basket_consignation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/basket_items" />
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:layout_height="0dp">
+                <CheckBox
+                    android:layout_weight="5"
+                    android:id="@+id/basket_consignation"
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:gravity="left|center"
+                    android:text="Консигнация"
+                    app:layout_constraintBottom_toTopOf="@+id/textView7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/basket_items" />
+                <TextView
+                    android:id="@+id/owner_consignation_tilldate"
+                    android:layout_weight="5"
+                    android:text="20.12.2020"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
             <TextView
+                android:layout_weight="0.5"
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="22dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
                 android:text="Оплата"
+                android:gravity="center|left"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/basket_radiogroup"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/basket_consignation" />
 
             <RadioGroup
+                android:layout_weight="1.3"
                 android:id="@+id/basket_radiogroup"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_height="0dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:weightSum="15"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
@@ -106,28 +144,35 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView7">
 
                 <RadioButton
+                    android:id="@+id/payment_type_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="8"
                     android:text="Наличный" />
 
                 <RadioButton
+                    android:id="@+id/payment_type_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="8"
                     android:text="Безналичный" />
             </RadioGroup>
+            <View
+                android:layout_weight="0.2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"></View>
 
             <LinearLayout
+                android:layout_weight="2"
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:weightSum="10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/basket_radiogroup">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -150,7 +195,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:gravity="left|center"
-                        android:text="3200тг"
+                        android:text=""
                         android:textColor="@color/colorBlack"
                         android:textSize="17sp" />
                 </LinearLayout>
@@ -167,21 +212,7 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/basket_items"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="5dp"
-                android:scrollbars="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/basket_consignation"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

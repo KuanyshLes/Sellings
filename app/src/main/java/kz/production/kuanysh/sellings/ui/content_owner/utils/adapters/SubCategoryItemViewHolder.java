@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 import kz.production.kuanysh.sellings.R;
+import kz.production.kuanysh.sellings.ui.content_owner.fragments.main.subcategory.SupplierProductSubCategoryPresenter;
+import kz.production.kuanysh.sellings.ui.content_owner.fragments.main.subcategory.SupplierProductSubcategoryMvpView;
 
 /**
  * Created by User on 14.06.2018.
@@ -17,9 +19,11 @@ import kz.production.kuanysh.sellings.R;
 
 public class SubCategoryItemViewHolder extends ChildViewHolder {
 
-
+    SupplierProductSubCategoryPresenter<SupplierProductSubcategoryMvpView> mPresenter;
     private TextView name,price,amount,to_basket;
     private ImageView minus,plus;
+    private int mId;
+    private static int count=1;
 
     public SubCategoryItemViewHolder(View itemView,Context context) {
         super(itemView);
@@ -34,7 +38,7 @@ public class SubCategoryItemViewHolder extends ChildViewHolder {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int count=Integer.parseInt(amount.getText().toString());
+                count=Integer.parseInt(amount.getText().toString());
                 count+=1;
                 amount.setText(count+"");
             }
@@ -42,11 +46,11 @@ public class SubCategoryItemViewHolder extends ChildViewHolder {
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(amount.getText().toString())>=1){
-                    int count=Integer.parseInt(amount.getText().toString());
+                if(Integer.parseInt(amount.getText().toString())>1){
+                    count=Integer.parseInt(amount.getText().toString());
                     count-=1;
                     amount.setText(count+"");
-                }else{
+                }else if(Integer.parseInt(amount.getText().toString())==1){
                     Snackbar.make(v, "Осталось "+amount.getText().toString()+" штук", Snackbar.LENGTH_LONG).show();
                 }
 
@@ -54,12 +58,23 @@ public class SubCategoryItemViewHolder extends ChildViewHolder {
             }
         });
 
+        to_basket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.onBasketAddClick(mId,count);
+                //mPresenter.getMvpView().showMessage("count - "+count);
+
+            }
+        });
+
     }
 
-    public void setArtistName(String nametext,int pricetext,int amounttext,final Context context) {
+    public void setArtistName(SupplierProductSubCategoryPresenter<SupplierProductSubcategoryMvpView> presenter,int id, String nametext, int pricetext, final Context context) {
+        mId=id;
+        mPresenter=presenter;
         name.setText(nametext);
-        amount.setText(pricetext+"");
-        price.setText(amounttext+" тг");
+        amount.setText("1");
+        price.setText(pricetext+" тг");
     }
 }
 

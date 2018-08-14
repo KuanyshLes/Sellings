@@ -3,9 +3,8 @@ package kz.production.kuanysh.sellings.ui.content_owner.utils;
 import java.util.Arrays;
 import java.util.List;
 
-import kz.production.kuanysh.sellings.R;
-import kz.production.kuanysh.sellings.model.Product;
-import kz.production.kuanysh.sellings.model.SubCategory;
+import kz.production.kuanysh.sellings.data.model.Product;
+import kz.production.kuanysh.sellings.data.model.SubCategory;
 
 /**
  * Created by User on 14.06.2018.
@@ -14,7 +13,7 @@ import kz.production.kuanysh.sellings.model.SubCategory;
 
 public class SubcategoryDataFactory {
 
-    public static List<SubCategory> makeGenres() {
+    /*public static List<SubCategory> makeGenres() {
         return Arrays.asList(makeRockGenre(),
                 makeJazzGenre(),
                 makeClassicGenre(),
@@ -91,6 +90,6 @@ public class SubcategoryDataFactory {
         Product product2 = new Product("Молоко Моё",1600,1);
 
         return Arrays.asList(product, product1,product2);
-    }
+    }*/
 
 }

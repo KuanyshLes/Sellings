@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorWhite"
-    tools:context="kz.production.kuanysh.sellings.ui.content_suppiler.fragments.goods.SupplierGoodsFragment">
+    tools:context="kz.production.kuanysh.sellings.ui.content_suppiler.fragments.goods.itemproduct.SupplierGoodsFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,7 +31,7 @@
                     android:id="@+id/supplier_goods_toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Арман Трендс Конфет"
+                    android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -97,14 +97,26 @@
                 android:background="?android:attr/listDivider"/>
 
         </android.support.constraint.ConstraintLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/supplier_goods_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_below="@id/linearLayout"
-            android:scrollbars="vertical">
 
-        </android.support.v7.widget.RecyclerView>
+        <FrameLayout
+            android:layout_below="@id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/supplier_goods_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+                android:scrollbars="vertical">
+
+            </android.support.v7.widget.RecyclerView>
+            <include
+                android:id="@+id/id_nullable"
+                layout="@layout/layout_null_factory"
+                android:visibility="visible">
+            </include>
+        </FrameLayout>
+
     </RelativeLayout>
 </FrameLayout>

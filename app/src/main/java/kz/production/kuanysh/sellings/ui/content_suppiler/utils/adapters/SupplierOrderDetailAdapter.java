@@ -1,35 +1,29 @@
 package kz.production.kuanysh.sellings.ui.content_suppiler.utils.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import kz.production.kuanysh.sellings.R;
-import kz.production.kuanysh.sellings.model.Product;
-import kz.production.kuanysh.sellings.ui.content_owner.utils.Colors;
+import kz.production.kuanysh.sellings.data.model.Product;
 import kz.production.kuanysh.sellings.ui.content_owner.utils.Listener;
+import kz.production.kuanysh.sellings.utils.AppConstants;
 
 /**
  * Created by User on 15.06.2018.
  */
 
 public class SupplierOrderDetailAdapter extends RecyclerView.Adapter<SupplierOrderDetailAdapter.ViewHolder>{
-    private List<Product> productItemList;
-    private Context context;
+    private List<kz.production.kuanysh.sellings.data.network.model.supplier.orderdetail.Product> productItemList;
     private Listener listener;
 
-    public SupplierOrderDetailAdapter(List<Product> productItemList, Context context) {
-
+    public SupplierOrderDetailAdapter(List<kz.production.kuanysh.sellings.data.network.model.supplier.orderdetail.Product> productItemList) {
         this.productItemList = productItemList;
-        this.context = context;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -60,21 +54,21 @@ public class SupplierOrderDetailAdapter extends RecyclerView.Adapter<SupplierOrd
         TextView amount = (TextView) cardView.findViewById(R.id.supplier_order_detail_product_amount);
         TextView price= (TextView) cardView.findViewById(R.id.supplier_order_detail_product_price);
 
-        name.setText(productItemList.get(position).getName().toString());
-        amount.setText(productItemList.get(position).getCount()+"");
-        price.setText(productItemList.get(position).getPrice()+" тг");
+        name.setText(productItemList.get(position).getTitle().toString());
+        amount.setText(productItemList.get(position).getNumberOfStock()+"");
+        price.setText(productItemList.get(position).getPrice()+ AppConstants.MONEY_TYPE);
 
-        /*cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onClick(position);
-            }
-        });*/
+
     }
 
     @Override
     public int getItemCount() {
         return productItemList.size();
+    }
+
+    public void addItems(List<kz.production.kuanysh.sellings.data.network.model.supplier.orderdetail.Product> products){
+        productItemList.addAll(products);
+        notifyDataSetChanged();
     }
 
 

@@ -15,26 +15,30 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import kz.production.kuanysh.sellings.R;
-import kz.production.kuanysh.sellings.model.Product;
+import kz.production.kuanysh.sellings.data.model.Product;
+import kz.production.kuanysh.sellings.data.network.model.supplier.subproducts.Result;
 import kz.production.kuanysh.sellings.ui.content_owner.utils.Listener;
-import kz.production.kuanysh.sellings.ui.content_suppiler.SupplierActivity;
-import kz.production.kuanysh.sellings.ui.content_suppiler.fragments.goods.SupplierEditGoodsFragment;
+import kz.production.kuanysh.sellings.ui.content_suppiler.activity.SupplierActivity;
+import kz.production.kuanysh.sellings.ui.content_suppiler.fragments.goods.edit.SupplierEditGoodsFragment;
+import kz.production.kuanysh.sellings.ui.content_suppiler.fragments.goods.itemproduct.SupplierGoodsMvpView;
+import kz.production.kuanysh.sellings.ui.content_suppiler.fragments.goods.itemproduct.SupplierGoodsPresenter;
+import kz.production.kuanysh.sellings.utils.AppConstants;
 
-import static kz.production.kuanysh.sellings.ui.content_suppiler.SupplierActivity.SUPPLIER_VISIBLE_FRAGMENT_TAG;
+import static kz.production.kuanysh.sellings.ui.content_suppiler.activity.SupplierActivity.SUPPLIER_VISIBLE_FRAGMENT_TAG;
 
 /**
  * Created by User on 13.06.2018.
  */
 
 public class GoodsItemsAdapter extends RecyclerView.Adapter<GoodsItemsAdapter.ViewHolder> {
-    private List<Product> goods_list;
+    private List<Result> productList;
     private Context context;
     private Listener listener;
+    SupplierGoodsPresenter<SupplierGoodsMvpView> mPresenter;
 
 
-    public GoodsItemsAdapter(List<Product> goods_list, Context context) {
-        this.goods_list = goods_list;
-        this.context = context;
+    public GoodsItemsAdapter(List<Result> productList) {
+        this.productList = productList;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,29 +72,22 @@ public class GoodsItemsAdapter extends RecyclerView.Adapter<GoodsItemsAdapter.Vi
         ImageView edit=(ImageView)cardView.findViewById(R.id.supplier_good_item_edit);
         ImageView trash=(ImageView)cardView.findViewById(R.id.supplier_good_item_delete);
 
-        name.setText(goods_list.get(i).getName().toString());
-        price.setText(goods_list.get(i).getPrice()+"тг");
+        name.setText(productList.get(i).getTitle().toString());
+        price.setText(productList.get(i).getPrice()+ AppConstants.MONEY_TYPE);
+        amount.setText(productList.get(i).getNumberOfStock());
 
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SupplierEditGoodsFragment addGoodsFragment=new SupplierEditGoodsFragment();
-                setFragment(addGoodsFragment);
+                mPresenter.getMvpView().openEditcategoryFragment(i);
             }
         });
 
         trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goods_list.remove(i);
-                try {
-                    TimeUnit.MILLISECONDS.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Snackbar.make(v, "Успешно удалено!", Snackbar.LENGTH_LONG).show();
-                notifyDataSetChanged();
+                mPresenter.getMvpView().openDeleteDialog(productList.get(i).getId());
             }
         });
 
@@ -107,7 +104,12 @@ public class GoodsItemsAdapter extends RecyclerView.Adapter<GoodsItemsAdapter.Vi
     }
     @Override
     public int getItemCount() {
-        return goods_list.size();
+        return productList.size();
+    }
+
+    public void addItems(List<Result> results){
+        productList=results;
+        notifyDataSetChanged();
     }
     //fragment changer
     private void setFragment(Fragment fragment){
@@ -115,6 +117,9 @@ public class GoodsItemsAdapter extends RecyclerView.Adapter<GoodsItemsAdapter.Vi
                 .replace(R.id.supplier_content_frame, fragment, SUPPLIER_VISIBLE_FRAGMENT_TAG)
                 .addToBackStack(null)
                 .commit();
+    }
+    public void addPresenter(SupplierGoodsPresenter<SupplierGoodsMvpView> presenter){
+        mPresenter=presenter;
     }
 
 

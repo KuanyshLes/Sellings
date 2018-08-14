@@ -44,14 +44,33 @@
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.Toolbar>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/supplier_orders"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_supplier_orders"
+            android:layout_below="@id/supplier_main_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:layout_below="@id/supplier_main_toolbar">
+            android:layout_height="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/supplier_orders"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp">
 
-        </android.support.v7.widget.RecyclerView>
+                </android.support.v7.widget.RecyclerView>
+                <include
+                    android:id="@+id/id_nullable"
+                    layout="@layout/layout_null_factory"
+                    android:visibility="visible">
+
+                </include>
+
+            </FrameLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
     </RelativeLayout>
 

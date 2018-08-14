@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import kz.production.kuanysh.sellings.R;
-import kz.production.kuanysh.sellings.StartActivity;
+import kz.production.kuanysh.sellings.ui.welcomepart.start.StartActivity;
 
 public class RegistrationPhoneActivity extends AppCompatActivity {
 
