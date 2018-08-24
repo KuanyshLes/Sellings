@@ -39,6 +39,9 @@ import kz.production.kuanysh.sellings.ui.content_suppiler.utils.adapters.Supplie
  */
 public class SupplierConsignmentFragment extends BaseFragment implements SupplierConsignmentMvpView{
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     SupplierConsignmentPresenter<SupplierConsignmentMvpView> mPresenter;
 
@@ -107,7 +110,11 @@ public class SupplierConsignmentFragment extends BaseFragment implements Supplie
         bundle.putParcelable(KEY_CONSIGNMENT_ID, consignmentList.get(position));
         consignmentItemControlFragment.setArguments(bundle);
         FragmentTransaction transaction= ((AppCompatActivity)getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.supplier_content_frame,consignmentItemControlFragment, SupplierActivity.SUPPLIER_VISIBLE_FRAGMENT_TAG).commit();
+        transaction.add(R.id.supplier_content_frame,consignmentItemControlFragment,
+                SupplierActivity.SUPPLIER_VISIBLE_FRAGMENT_TAG)
+                .hide(this)
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .commit();
     }
 
     @Override

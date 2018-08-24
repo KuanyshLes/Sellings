@@ -44,6 +44,9 @@ import static kz.production.kuanysh.sellings.ui.content_suppiler.fragments.goods
  */
 public class SupplierGoodsFragment extends BaseFragment implements SupplierGoodsMvpView{
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     SupplierGoodsPresenter<SupplierGoodsMvpView> mPresenter;
 
@@ -157,7 +160,7 @@ public class SupplierGoodsFragment extends BaseFragment implements SupplierGoods
 
     @Override
     public void openSubcategoryFragment() {
-        SupplierGoodsSubcategoryFragment supplierGoodsSubcategoryFragment=new SupplierGoodsSubcategoryFragment();
+    /*    SupplierGoodsSubcategoryFragment supplierGoodsSubcategoryFragment=new SupplierGoodsSubcategoryFragment();
         bundle=new Bundle();
         bundle.putInt(SupplierCategoryFragment.CATEGORY_ID_KEY,CATEGORY_ID);
         bundle.putString(SupplierCategoryFragment.CATEGORY_NAME_KEY,CATEGORY_NAME);
@@ -166,7 +169,10 @@ public class SupplierGoodsFragment extends BaseFragment implements SupplierGoods
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.supplier_content_frame, supplierGoodsSubcategoryFragment, SUPPLIER_VISIBLE_FRAGMENT_TAG)
                 .addToBackStack(null)
-                .commit();
+                .commit();*/
+
+        getActivity().getSupportFragmentManager().popBackStack();
+
     }
 
     @Override
@@ -181,8 +187,9 @@ public class SupplierGoodsFragment extends BaseFragment implements SupplierGoods
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.supplier_content_frame, supplierAddGoodFragment, SUPPLIER_TAG_GOODS)
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .hide(this)
+                .add(R.id.supplier_content_frame, supplierAddGoodFragment, SUPPLIER_TAG_GOODS)
                 .commit();
     }
 
@@ -242,8 +249,9 @@ public class SupplierGoodsFragment extends BaseFragment implements SupplierGoods
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.supplier_content_frame, supplierEditGoodsFragment, SUPPLIER_TAG_GOODS)
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .hide(this)
+                .add(R.id.supplier_content_frame, supplierEditGoodsFragment, SUPPLIER_TAG_GOODS)
                 .commit();
 
     }

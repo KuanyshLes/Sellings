@@ -100,9 +100,9 @@ public class ConsignmentItemControlFragment extends BaseFragment implements Cons
 
     @Override
     public void openAllConsignment() {
+        getActivity().getSupportFragmentManager().popBackStack();
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, SupplierConsignmentFragment.newInstance(), SUPPLIER_TAG_CONSIGNMENT)
                 .commit();
     }
@@ -110,7 +110,7 @@ public class ConsignmentItemControlFragment extends BaseFragment implements Cons
     @Override
     public void updateItem() {
         control_name.setText(result.getShopName().replace("\"",""));
-        control_time.setText(result.getTillDate());
+        control_time.setText(result.getCredit());
         control_price.setText(result.getAmount()+ AppConstants.MONEY_TYPE);
         control_summa.setText(result.getCredit().toString());
         Glide.with(getActivity()).load(result.getProviderImage()).into(control_image);

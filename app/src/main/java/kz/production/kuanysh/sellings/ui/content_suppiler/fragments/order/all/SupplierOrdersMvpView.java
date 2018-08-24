@@ -15,5 +15,5 @@ public interface SupplierOrdersMvpView extends MvpView {
 
     void openItem(int position);
 
-    void updateOrders(List<Order> orders);
+    void updateOrders(List<Order> orders,int count_page);
 }

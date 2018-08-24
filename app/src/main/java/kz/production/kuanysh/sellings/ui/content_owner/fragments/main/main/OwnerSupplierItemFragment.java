@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,12 +38,17 @@ import kz.production.kuanysh.sellings.ui.content_owner.fragments.main.category.S
 import kz.production.kuanysh.sellings.ui.content_owner.utils.Listener;
 import kz.production.kuanysh.sellings.ui.content_owner.utils.adapters.SupplierAdapter;
 
+import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.TAG;
 import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.TAG_MAIN;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class OwnerSupplierItemFragment extends BaseFragment implements OwnerSupplierItemMvpView{
+
+
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
 
     @Nullable
     @BindView(R.id.main_toolbar)
@@ -53,6 +61,8 @@ public class OwnerSupplierItemFragment extends BaseFragment implements OwnerSupp
     @BindView(R.id.supplier_list)
     RecyclerView supplier_list;
 
+    @BindView(R.id.swipyrefreshlayout)
+    SwipyRefreshLayout swipyRefreshLayout;
 
     @BindView(R.id.main_toolbar_drawer)
     ImageView drawerHelper;
@@ -74,6 +84,9 @@ public class OwnerSupplierItemFragment extends BaseFragment implements OwnerSupp
     public static String SUPPLIER_USER_NAME="";
 
     private LinearLayoutManager linearLayoutManager;
+    public static int page=0;
+    public static int ALL_PAGE=0;
+
     private List<Provider> list;
     private Bundle bundle;
 
@@ -126,7 +139,6 @@ public class OwnerSupplierItemFragment extends BaseFragment implements OwnerSupp
     public void openBasketFragment() {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.content_frame, new BasketProvidersFragment(), TAG_MAIN)
                 .commit();
     }
@@ -141,17 +153,21 @@ public class OwnerSupplierItemFragment extends BaseFragment implements OwnerSupp
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.content_frame, supplierProductFragment, TAG_MAIN)
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .hide(this)
+                .add(R.id.content_frame, supplierProductFragment, TAG_MAIN)
                 .commit();
     }
 
     @Override
-    public void refreshSupplierList(List<Provider> supplierItems) {
+    public void refreshSupplierList(List<Provider> supplierItems,int page_count) {
+        ALL_PAGE=page_count+1;
+        swipyRefreshLayout.setRefreshing(false);
         supplier_list.setVisibility(View.VISIBLE);
         nullText.setVisibility(View.GONE);
-        list=supplierItems;
-        supplierAdapter.addItems(supplierItems);
+        list.addAll(supplierItems);
+        supplierAdapter.addItems(list);
+        linearLayoutManager.scrollToPosition(list.size()-19);
 
     }
 
@@ -161,13 +177,34 @@ public class OwnerSupplierItemFragment extends BaseFragment implements OwnerSupp
         linearLayoutManager=new LinearLayoutManager(getActivity());
         supplier_list.setLayoutManager(linearLayoutManager);
         supplier_list.setAdapter(supplierAdapter);
+        list=new ArrayList<>();
         supplierAdapter.setListener(new Listener() {
             @Override
             public void onClick(int position) {
                 mPresenter.onSupplierItemClick(position);
             }
         });
-        mPresenter.onViewPrepared();
+        mPresenter.onViewPrepared(String.valueOf(page));
+
+        swipyRefreshLayout.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                if(direction==SwipyRefreshLayoutDirection.TOP){
+                    list.clear();
+                    supplierAdapter.notifyDataSetChanged();
+                    page=0;
+                    mPresenter.onViewPrepared(String.valueOf(page));
+                }else{
+                    if(page!=ALL_PAGE-1){
+                        page++;
+                        mPresenter.onViewPrepared(String.valueOf(page));
+                    }else{
+                        swipyRefreshLayout.setRefreshing(false);
+
+                    }
+                }
+            }
+        });
     }
 
 

@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +43,9 @@ import static kz.production.kuanysh.sellings.ui.content_suppiler.activity.Suppli
 public class SupplierOrdersFragment extends BaseFragment implements SupplierOrdersMvpView{
 
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     SupplierOrdersPresenter<SupplierOrdersMvpView> mPresenter;
 
@@ -47,7 +53,7 @@ public class SupplierOrdersFragment extends BaseFragment implements SupplierOrde
     ImageView back;
 
     @BindView(R.id.swipe_supplier_orders)
-    SwipeRefreshLayout swipeRefreshLayout;
+    SwipyRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.supplier_orders)
     RecyclerView supplierOrdersList;
@@ -60,6 +66,7 @@ public class SupplierOrdersFragment extends BaseFragment implements SupplierOrde
 
     private LinearLayoutManager linearLayoutManager;
     private static int PAGE_NUMBER=0;
+    public static int ALL_PAGE=0;
 
     private static List<Order> orderList;
     private DrawerLayout drawerLayout;
@@ -120,13 +127,15 @@ public class SupplierOrdersFragment extends BaseFragment implements SupplierOrde
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.supplier_content_frame, supplierOrderDetailFragment, SUPPLIER_TAG_MAIN)
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .hide(this)
+                .add(R.id.supplier_content_frame, supplierOrderDetailFragment, SUPPLIER_TAG_MAIN)
                 .commit();
     }
 
     @Override
-    public void updateOrders(List<Order> orders) {
+    public void updateOrders(List<Order> orders,int count_pages) {
+        ALL_PAGE=count_pages+1;
         supplierOrdersList.setVisibility(View.VISIBLE);
         nullText.setVisibility(View.GONE);
         swipeRefreshLayout.setRefreshing(false);
@@ -146,24 +155,34 @@ public class SupplierOrdersFragment extends BaseFragment implements SupplierOrde
             @Override
             public void onClick(int position) {
                 mPresenter.onItemClick(position);
-
             }
         });
-        swipeRefreshLayout.setRefreshing(true);
+
         mPresenter.onViewPrepared(PAGE_NUMBER);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
-                orderList.clear();
-                supplierOrderAdapter.notifyDataSetChanged();
-                mPresenter.onViewPrepared(0);
+            public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                if(direction==SwipyRefreshLayoutDirection.TOP){
+                    orderList.clear();
+                    supplierOrderAdapter.notifyDataSetChanged();
+                    PAGE_NUMBER=0;
+                    mPresenter.onViewPrepared(PAGE_NUMBER);
+                }else{
+                    if(PAGE_NUMBER!=ALL_PAGE-1){
+                        PAGE_NUMBER++;
+                        mPresenter.onViewPrepared(PAGE_NUMBER);
+                    }else{
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }
             }
         });
     }
 
     @Override
     public void onDestroyView() {
+        PAGE_NUMBER=0;
         mPresenter.onDetach();
         super.onDestroyView();
     }

@@ -42,6 +42,7 @@ import kz.production.kuanysh.sellings.R;
 import kz.production.kuanysh.sellings.ui.base.BaseActivity;
 import kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity;
 import kz.production.kuanysh.sellings.ui.welcomepart.login.LoginActivity;
+import kz.production.kuanysh.sellings.utils.rx.AppMessages;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -156,13 +157,13 @@ public class OwnerRegistrationActivity extends BaseActivity implements OwnerRegi
                                 address.getEditText().getText().toString(),
                                 SUBTYPE);
             }else{
-                mPresenter.getMvpView().onError("Select one of registration type");
+                mPresenter.getMvpView().onError(AppMessages.REGISTRATION_TYPE);
             }
 
 
         }
         else{
-            mPresenter.getMvpView().onError("Please tap to default icon to select profile photo");
+            mPresenter.getMvpView().onError(AppMessages.REGISTRATION_PHOTO);
         }
 
         //mPresenter.onRegistrationClick();
@@ -243,22 +244,6 @@ public class OwnerRegistrationActivity extends BaseActivity implements OwnerRegi
 
         }
 
-    }
-    public static String getPath(Context context, Uri uri ) {
-        String result = null;
-        String[] proj = { MediaStore.Images.Media.DATA };
-        Cursor cursor = context.getContentResolver( ).query( uri, proj, null, null, null );
-        if(cursor != null){
-            if ( cursor.moveToFirst( ) ) {
-                int column_index = cursor.getColumnIndexOrThrow( proj[0] );
-                result = cursor.getString( column_index );
-            }
-            cursor.close( );
-        }
-        if(result == null) {
-            result = "Not found";
-        }
-        return result;
     }
 
 

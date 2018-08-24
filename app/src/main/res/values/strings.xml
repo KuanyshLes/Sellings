@@ -102,4 +102,30 @@
     <string name="FACEBOOK_APP_ID">992075960963748</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">5fe7198d0adce35720b8c2cd1d23c8b1</string>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="error_occured">Что-то пошло не так!</string>
+    <string name="not_connection">Нет подключения к интернету!</string>
+    <string name="credentials_cannot_be_an_empty">Заполните все данные!</string>
+    <string name="credentials_not_saved">Данные не сохранены!</string>
+
 </resources>

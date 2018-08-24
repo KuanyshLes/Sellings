@@ -27,7 +27,7 @@ public interface SupplierProfileMvpView extends MvpView {
 
     void logOut();
 
-    void onImageReceive(String imagelink);
+    void onImageReceive(String imagelink,String from,String to);
 
     void openExitDialog();
 

@@ -41,15 +41,19 @@
                 android:layout_weight="2.5"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="Арман Трендс Конфет"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text=""
                 android:textSize="20sp"
                 android:textColor="#161616"/>
             <TextView
                 android:id="@+id/supplier_category"
                 android:layout_weight="2"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="конфеты,печении,сладости"
+                android:text=""
                 android:textColor="@color/colorBlueLogin"/>
             <LinearLayout
                 android:layout_weight="1.8"
@@ -57,17 +61,17 @@
                 android:layout_height="0dp"
                 android:weightSum="100">
                 <ImageView
+                    android:padding="2.8dp"
                     android:layout_weight="10"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    card_view:srcCompat="@mipmap/ic_schedule_24px" />
+                    android:src="@mipmap/ic_schedule_24px" />
                 <TextView
                     android:id="@+id/supplier_time"
                     android:layout_weight="255"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="9.00-24.00"
-                    android:paddingLeft="8dp"/>
+                    android:text=""/>
             </LinearLayout>
             <LinearLayout
                 android:layout_weight="1.8"
@@ -75,17 +79,19 @@
                 android:layout_height="0dp"
                 android:weightSum="100">
                 <ImageView
+                    android:padding="2.8dp"
                     android:layout_weight="10"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    card_view:srcCompat="@mipmap/ic_room_24px"/>
+                    android:src="@mipmap/ic_room_24px"/>
                 <TextView
                     android:id="@+id/supplier_address"
                     android:layout_weight="255"
                     android:layout_width="0dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:layout_height="match_parent"
-                    android:text="Ул.Байтурсынулы 56а"
-                    android:paddingLeft="8dp"/>
+                    android:text=""/>
             </LinearLayout>
 
         </LinearLayout>

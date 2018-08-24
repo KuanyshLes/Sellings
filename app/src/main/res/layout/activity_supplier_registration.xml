@@ -16,24 +16,30 @@
         android:weightSum="15">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:layout_weight="2.5"
-            android:weightSum="9"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
-            <View
-                android:layout_weight="3.5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="2.8"
+            android:orientation="horizontal"
+            android:weightSum="9">
 
-            </View>
-            <ImageView
-                android:id="@+id/supplier_registration_image"
+            <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="3.1">
+
+            </View>
+
+            <carbon.widget.ImageView
+                android:id="@+id/supplier_registration_image"
+                android:layout_width="0dp"
+                android:layout_margin="3dp"
+                app:carbon_cornerRadius="8dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="top|center_horizontal"
-                android:layout_weight="2"
+                android:layout_weight="2.8"
+                android:adjustViewBounds="false"
+                android:scaleType="centerCrop"
                 app:srcCompat="@mipmap/group52" />
         </LinearLayout>
 
@@ -41,7 +47,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10.8"
+            android:layout_weight="10.4"
             android:layout_marginTop="15dp"
             android:weightSum="7">
 

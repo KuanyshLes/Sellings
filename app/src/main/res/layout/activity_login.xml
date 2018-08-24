@@ -46,7 +46,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-        <EditText
+        <com.santalu.widget.MaskEditText
             android:id="@+id/login_phone_number"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -54,9 +54,10 @@
             android:background="@drawable/shape_rectangle_right"
             android:gravity="center"
             android:inputType="number"
+            android:text="7"
+            app:met_mask="+# (###) ### ## ##"
             android:paddingLeft="10dp"
-            android:text=""
-            android:textSize="17sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -66,7 +67,7 @@
             android:gravity="right|center"
             android:paddingRight="10dp"
             android:text="Номер телефона"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -95,7 +96,7 @@
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:text=""
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -105,7 +106,7 @@
             android:gravity="right|center"
             android:paddingRight="10dp"
             android:text="Пароль"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <TextView

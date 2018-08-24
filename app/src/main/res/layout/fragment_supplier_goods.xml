@@ -72,6 +72,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_marginStart="4dp"
                 android:text="Подробнее о договоре"
                 android:textColor="@color/colorMoreGrey"

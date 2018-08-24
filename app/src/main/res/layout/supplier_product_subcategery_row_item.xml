@@ -13,14 +13,20 @@
         android:id="@+id/supplier_product_subcategory_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="9dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="Молоко"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/supplier_product_subcategory_next"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/supplier_product_subcategory_next"
@@ -33,9 +39,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_chevron_right_1" />
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"/>
 
 </android.support.constraint.ConstraintLayout>

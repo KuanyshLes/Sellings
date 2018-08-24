@@ -55,6 +55,7 @@ import kz.production.kuanysh.sellings.ui.content_owner.fragments.changecredentia
 import kz.production.kuanysh.sellings.ui.content_suppiler.fragments.statistics.StatisticsFragment;
 import kz.production.kuanysh.sellings.ui.welcomepart.start.StartActivity;
 import kz.production.kuanysh.sellings.utils.AppConstants;
+import kz.production.kuanysh.sellings.utils.rx.AppMessages;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -63,12 +64,16 @@ import static kz.production.kuanysh.sellings.ui.content_owner.fragments.profile.
 import static kz.production.kuanysh.sellings.ui.content_owner.fragments.profile.ProfileFragment.STATUS_KEY;
 import static kz.production.kuanysh.sellings.ui.content_owner.fragments.profile.ProfileFragment.STATUS_PASSWORD;
 import static kz.production.kuanysh.sellings.ui.content_owner.fragments.profile.ProfileFragment.STATUS_PHONE;
+import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.TAG;
 import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.TAG_MAIN;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SupplierProfileFragment extends BaseFragment implements SupplierProfileMvpView{
+
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
 
     @Inject
     SupplierProfilePresenter<SupplierProfileMvpView> mPresenter;
@@ -164,7 +169,7 @@ public class SupplierProfileFragment extends BaseFragment implements SupplierPro
     public void editPro(){
         mPresenter.getMvpView().setVisibility(AppConstants.TAG_EDIT);
         mPresenter.getMvpView().setEnablity(true);
-        mPresenter.getMvpView().showMessage("Tap to change image");
+        mPresenter.getMvpView().showMessage(AppMessages.CHANGE_IMAGE);
     }
 
 
@@ -282,8 +287,10 @@ public class SupplierProfileFragment extends BaseFragment implements SupplierPro
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.supplier_content_frame, changeInfoFragment, TAG_MAIN).commit();
+                .add(R.id.supplier_content_frame, changeInfoFragment, TAG_MAIN)
+                .hide(this)
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .commit();
     }
 
     @OnClick(R.id.supplier_card_logout)
@@ -345,9 +352,11 @@ public class SupplierProfileFragment extends BaseFragment implements SupplierPro
     }
 
     @Override
-    public void onImageReceive(String imagelink) {
+    public void onImageReceive(String imagelink,String from,String to) {
         Glide.with(this).load(AppConstants.BASE_URL_IMAGE+imagelink).into(photo);
         IMAGE_LINK=AppConstants.BASE_URL_IMAGE+imagelink;
+        Log.d("request", "onImageReceive: from  "+mPresenter.getDataManager().getCurrentSupplierTimeFrom());
+        Log.d("request", "onImageReceive: to  "+mPresenter.getDataManager().getCurrentSupplierTimeTo());
     }
 
     @Override
@@ -367,7 +376,7 @@ public class SupplierProfileFragment extends BaseFragment implements SupplierPro
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         //set size
         dialog.getWindow().setLayout((int)(displayRectangle.width() *
-                0.84f), (int)(displayRectangle.height() * 0.24f));
+                0.84f), (int)(displayRectangle.height() * 0.20f));
 
 
         TextView ok=(TextView)mView.findViewById(R.id.dialog_exit_ok);
@@ -396,17 +405,8 @@ public class SupplierProfileFragment extends BaseFragment implements SupplierPro
             File f = new File(filePath);  //
             uriImage = Uri.fromFile(f);
 
-            final InputStream inputStream;
-            try {
-                inputStream = getActivity().getContentResolver().openInputStream(uriImage);
-                Bitmap imageMap = BitmapFactory.decodeStream(inputStream);
-                photo.setImageBitmap(imageMap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            Glide.with(getActivity()).load(filePath).into(photo);
 
-
-            //uriImage=image.
 
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -419,12 +419,13 @@ public class SupplierProfileFragment extends BaseFragment implements SupplierPro
         mPresenter.getMvpView().setVisibility(AppConstants.TAG_SAVE);
         mPresenter.onImageRequest();
         for(int i=0;i<timeFrom.getCount();i++){
-            if(timeFrom.getItemAtPosition(i).equals(mPresenter.getDataManager().getCurrentSupplierTimeFrom())){
+            if(timeFrom.getItemAtPosition(i).equals(mPresenter.getDataManager().
+                    getCurrentSupplierTimeFrom().replace("\"",""))){
                 timeFrom.setSelection(i);
             }
         }
         for(int i=0;i<timeTo.getCount();i++){
-            if(timeTo.getItemAtPosition(i).equals(mPresenter.getDataManager().getCurrentSupplierTimeTo())){
+            if(timeTo.getItemAtPosition(i).equals(mPresenter.getDataManager().getCurrentSupplierTimeTo().replace("\"",""))){
                 timeTo.setSelection(i);
             }
         }

@@ -40,6 +40,9 @@ import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.
  */
 public class SupplierProductSubcategoryFragment extends BaseFragment implements SupplierProductSubcategoryMvpView{
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     SupplierProductSubCategoryPresenter<SupplierProductSubcategoryMvpView> mPresenter;
 
@@ -105,18 +108,10 @@ public class SupplierProductSubcategoryFragment extends BaseFragment implements 
     }
 
 
-    private void setFragment(Fragment fragment){
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, fragment, TAG);
-        ft.addToBackStack(null);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
-    }
 
     @OnClick(R.id.supplier_product_subcategory_toolbar_back)
     public void goCategory(){
-        SupplierProductFragment supplierProductFragment=new SupplierProductFragment();
-        setFragment(supplierProductFragment);
+        mPresenter.getMvpView().openCategoryFragment();
     }
 
     @Override
@@ -141,18 +136,19 @@ public class SupplierProductSubcategoryFragment extends BaseFragment implements 
 
     @Override
     public void openCategoryFragment() {
-        SupplierProductFragment supplierProductFragment=new SupplierProductFragment();
-        bundle=new Bundle();
-        bundle.putString(OwnerSupplierItemFragment.USER_NAME_KEY,USER_NAME);
-        bundle.putInt(OwnerSupplierItemFragment.USER_ID_KEY,USER_ID);
-        supplierProductFragment.setArguments(bundle);
-
-
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.content_frame, supplierProductFragment, TAG_MAIN)
-                .commit();
+        getActivity().getSupportFragmentManager().popBackStack();
+//        SupplierProductFragment supplierProductFragment=new SupplierProductFragment();
+//        bundle=new Bundle();
+//        bundle.putString(OwnerSupplierItemFragment.USER_NAME_KEY,USER_NAME);
+//        bundle.putInt(OwnerSupplierItemFragment.USER_ID_KEY,USER_ID);
+//        supplierProductFragment.setArguments(bundle);
+//
+//
+//        getActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .disallowAddToBackStack()
+//                .replace(R.id.content_frame, supplierProductFragment, TAG_MAIN)
+//                .commit();
     }
 
     @Override

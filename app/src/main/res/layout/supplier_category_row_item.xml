@@ -13,18 +13,25 @@
         android:padding="15dp"
         android:background="@drawable/rectangle_left_top_right"
         android:weightSum="17">
+
         <TextView
             android:id="@+id/supplier_category_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Молоко"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/supplier_category_edit"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/supplier_category_delete"

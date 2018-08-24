@@ -44,6 +44,8 @@ import static kz.production.kuanysh.sellings.ui.content_suppiler.activity.Suppli
  */
 public class SupplierEditGoodsFragment extends BaseFragment implements SupplierEditGoodsMvpView{
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
     @Inject
     SupplierEditGoodsPresenter<SupplierEditGoodsMvpView> mPresenter;
 
@@ -203,6 +205,8 @@ public class SupplierEditGoodsFragment extends BaseFragment implements SupplierE
 
     @Override
     public void openSubcategoryFragments() {
+        getActivity().getSupportFragmentManager().popBackStack();
+
         SupplierGoodsFragment supplierGoodsFragment=new SupplierGoodsFragment();
         bundle=new Bundle();
         bundle.putInt(SupplierGoodsSubcategoryFragment.SUBCATEGORY_ID_KEY,SUBCATEGORY_ID);
@@ -216,6 +220,8 @@ public class SupplierEditGoodsFragment extends BaseFragment implements SupplierE
                 .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, supplierGoodsFragment, SUPPLIER_TAG_GOODS)
                 .commit();
+
+
     }
 
     @Override

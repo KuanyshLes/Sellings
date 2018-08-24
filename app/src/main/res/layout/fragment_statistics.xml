@@ -91,6 +91,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="3.5"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:gravity="top|center"
                         android:text=""
                         android:textSize="17sp"/>
@@ -101,6 +103,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="11"
                         android:gravity="center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="0"
                         android:textSize="58sp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -144,6 +148,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="3.5"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:gravity="top|center"
                         android:text=""
                         android:textSize="17sp"/>
@@ -154,6 +160,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="11"
                         android:gravity="center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                         android:textColor="@color/colorBlueLogin"
@@ -198,6 +206,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="3.5"
                         android:gravity="top|center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text=""
                         android:textSize="17sp"/>
 
@@ -207,6 +217,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="11"
                         android:gravity="center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                         android:textColor="@color/colorBlueLogin"

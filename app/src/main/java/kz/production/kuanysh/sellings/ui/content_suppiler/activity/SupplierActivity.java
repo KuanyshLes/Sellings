@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -32,6 +33,7 @@ import kz.production.kuanysh.sellings.ui.content_suppiler.fragments.statistics.S
 import kz.production.kuanysh.sellings.ui.content_suppiler.fragments.profile.SupplierProfileFragment;
 import kz.production.kuanysh.sellings.ui.welcomepart.login.LoginActivity;
 import kz.production.kuanysh.sellings.ui.welcomepart.registration.supplier.SupplierRegistrationActivity;
+import kz.production.kuanysh.sellings.utils.rx.AppMessages;
 
 public class SupplierActivity extends BaseActivity
         implements SupplierMvpView{
@@ -56,7 +58,7 @@ public class SupplierActivity extends BaseActivity
     public static final String SUPPLIER_TAG_CONSIGNMENT="consignment";
     public static final String SUPPLIER_TAG_PROFILE="profile";
     public static final String SUPPLIER_TAG_GOODS="goods";
-
+    private Boolean exit = false;
     public static  String firstTimeORNot = null;
     private static Dialog dialog;
     private static AlertDialog.Builder mBuilder;
@@ -80,7 +82,7 @@ public class SupplierActivity extends BaseActivity
         if(firstTimeORNot.equals(SupplierRegistrationActivity.TAG_SUPPLIER_REGISTRATION)){
             mPresenter.getMvpView().showDialogFirstTime();
         }else{
-            mPresenter.getMvpView().showMessage("logged in");
+           // mPresenter.getMvpView().showMessage("logged in");
         }
 
     }
@@ -131,21 +133,41 @@ public class SupplierActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        int count = getSupportFragmentManager().getBackStackEntryCount();
 
+        if (count == 0) {
+            if (exit) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else {
+                mPresenter.getMvpView().showMessage(AppMessages.TAP_TO_EXIT);
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 2 * 1000);
+
+            }
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+        /*if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
             startActivity(intent);
         } else {
             super.onBackPressed();
-
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
             startActivity(intent);
-        }
+        }*/
     }
 
 
@@ -156,45 +178,45 @@ public class SupplierActivity extends BaseActivity
 
     @Override
     public void openStatisticsFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, StatisticsFragment.newInstance(), SUPPLIER_TAG_MAIN)
                 .commit();
     }
 
     @Override
     public void openOrdersFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, SupplierOrdersFragment.newInstance(), SUPPLIER_TAG_MAIN)
                 .commit();
     }
 
     @Override
     public void openConsignmentFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, SupplierConsignmentFragment.newInstance(), SUPPLIER_TAG_MAIN)
                 .commit();
     }
 
     @Override
     public void openProfileFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, SupplierProfileFragment.newInstance(), SUPPLIER_TAG_MAIN)
                 .commit();
     }
 
     @Override
     public void openGoodsFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, SupplierCategoryFragment.newInstance(), SUPPLIER_TAG_GOODS)
                 .commit();
     }

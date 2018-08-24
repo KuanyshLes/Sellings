@@ -66,7 +66,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         String categoryString="";
         name.setText(supplierItemList.get(i).getTitle().replace("\"",""));
         for(int j=0;j<supplierItemList.get(i).getCategories().size();j++){
-            categoryString+=supplierItemList.get(i).getCategories().get(j).getTitle()+",";
+            categoryString+=supplierItemList.get(i).getCategories().get(j).getTitle()+", ";
             category.setText(categoryString.toString());
         }
         workingTime.setText(supplierItemList.get(i).getFromHours().replace("\"","")+"-"+
@@ -75,9 +75,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         if(categoryString.length()!=0){
             category.setText(categoryString.substring(0,categoryString.length()-1));
         }
-        if(category.getText().length()>25){
-            category.setText(categoryString.substring(0,25)+"...");
-        }
+
 
         Glide.with(imageView.getContext())
                 .load(supplierItemList.get(i).getImage())
@@ -99,8 +97,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
     }
 
     public void addItems(List<Provider> providers) {
-        //chat_item.clear();
-        supplierItemList.addAll(providers);
+        supplierItemList=providers;
         notifyDataSetChanged();
     }
 

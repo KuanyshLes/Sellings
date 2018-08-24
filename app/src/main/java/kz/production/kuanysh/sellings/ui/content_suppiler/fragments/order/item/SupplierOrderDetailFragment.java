@@ -134,11 +134,12 @@ public class SupplierOrderDetailFragment extends BaseFragment implements Supplie
 
     @Override
     public void openOrders() {
+        getActivity().getSupportFragmentManager().popBackStack();
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, SupplierOrdersFragment.newInstance(), SUPPLIER_TAG_MAIN)
                 .commit();
+
     }
 
     @Override

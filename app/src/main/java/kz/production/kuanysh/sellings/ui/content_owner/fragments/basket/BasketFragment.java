@@ -47,8 +47,10 @@ import kz.production.kuanysh.sellings.ui.content_owner.fragments.main.main.Owner
 import kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity;
 import kz.production.kuanysh.sellings.ui.content_owner.utils.adapters.BasketItemsAdapter;
 import kz.production.kuanysh.sellings.utils.AppConstants;
+import kz.production.kuanysh.sellings.utils.rx.AppMessages;
 
 import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.TAG_BASKET;
+import static kz.production.kuanysh.sellings.utils.rx.AppMessages.OWNER_ORDER_PAYMENT_TYPE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -163,9 +165,9 @@ public class BasketFragment extends BaseFragment implements BasketFragmentMvpVie
 
     @Override
     public void openProvidersFragment() {
+        getActivity().getSupportFragmentManager().popBackStack();
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.content_frame, BasketProvidersFragment.newInstance(), TAG_BASKET)
                 .commit();
 
@@ -197,11 +199,11 @@ public class BasketFragment extends BaseFragment implements BasketFragmentMvpVie
                 Log.d("myTag",PROVIDER_ID+" PROVIDER ID");
                 Log.d("myTag",PAYMENT_INT+" PAYMENT TYPE");
             }else{
-                mPresenter.getMvpView().showMessage("Please one of the payment type");
+                mPresenter.getMvpView().showMessage(OWNER_ORDER_PAYMENT_TYPE);
 
             }
         }else {
-            mPresenter.getMvpView().showMessage("Order must be greater than 5000 tenge");
+            mPresenter.getMvpView().showMessage(AppMessages.OWNER_ORDER_REQUEREMENT);
         }
 
     }
@@ -216,7 +218,7 @@ public class BasketFragment extends BaseFragment implements BasketFragmentMvpVie
 
         dateString = year+"/"+(monthOfYear+1)+"/"+dayOfMonth;
         tilldate.setVisibility(View.VISIBLE);
-        tilldate.setText(dateString);
+        tilldate.setText("до "+dateString);
     }
 
     @Override

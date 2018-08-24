@@ -40,6 +40,9 @@ import static kz.production.kuanysh.sellings.ui.content_suppiler.activity.Suppli
  */
 public class SupplierAddGoodFragment extends BaseFragment implements SupplierAddGoodMvpView{
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     SupplierAddGoodPresenter<SupplierAddGoodMvpView> mPresenter;
 
@@ -185,7 +188,7 @@ public class SupplierAddGoodFragment extends BaseFragment implements SupplierAdd
 
     @Override
     public void onSubcategoryProductsFragment() {
-        SupplierGoodsFragment supplierGoodsFragment=new SupplierGoodsFragment();
+      /*  SupplierGoodsFragment supplierGoodsFragment=new SupplierGoodsFragment();
         bundle=new Bundle();
         bundle.putInt(SupplierGoodsSubcategoryFragment.SUBCATEGORY_ID_KEY,SUBCATEGORY_ID);
         bundle.putString(SupplierGoodsSubcategoryFragment.SUBCATEGORY_NAME_KEY,SUBCATEGORY_NAME);
@@ -196,7 +199,9 @@ public class SupplierAddGoodFragment extends BaseFragment implements SupplierAdd
                 .beginTransaction()
                 .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, supplierGoodsFragment, SUPPLIER_TAG_GOODS)
-                .commit();
+                .commit();*/
+        getActivity().getSupportFragmentManager().popBackStack();
+
     }
 
     @Override

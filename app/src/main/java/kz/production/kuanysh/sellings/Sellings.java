@@ -1,6 +1,7 @@
 package kz.production.kuanysh.sellings;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
@@ -16,7 +17,7 @@ import kz.production.kuanysh.sellings.di.module.ApplicationModule;
  * Created by User on 24.06.2018.
  */
 
-public class Sellings extends Application {
+public class Sellings extends MultiDexApplication{
 
     @Inject
     DataManager mDataManager;

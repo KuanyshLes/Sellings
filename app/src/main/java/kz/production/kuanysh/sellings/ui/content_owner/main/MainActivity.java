@@ -1,6 +1,7 @@
 package kz.production.kuanysh.sellings.ui.content_owner.main;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -31,11 +32,12 @@ import kz.production.kuanysh.sellings.ui.content_owner.fragments.consignment.Own
 import kz.production.kuanysh.sellings.ui.content_owner.fragments.main.main.OwnerSupplierItemFragment;
 import kz.production.kuanysh.sellings.ui.content_owner.fragments.order.orders.OwnerOrdersFragment;
 import kz.production.kuanysh.sellings.ui.content_owner.fragments.profile.ProfileFragment;
+import kz.production.kuanysh.sellings.utils.rx.AppMessages;
 
 public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Inject
-    MainMvpPresenter<MainMvpView> mPresenter;
+    MainPresenter<MainMvpView> mPresenter;
 
 
     @Nullable
@@ -54,6 +56,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     public static final String TAG_MAIN="main";
     public static final String TAG_PROFILE="profile";
     public static final String TAG_BASKET="basket";
+    private Boolean exit = false;
     public static final String TAG_ORDERS="orders";
     public static final String TAG_CONSIGNMENT="consignment";
 
@@ -117,29 +120,31 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
-            startActivity(intent);
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            if (exit) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else {
+
+                mPresenter.getMvpView().showMessage(AppMessages.TAP_TO_EXIT);
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 2 * 1000);
+
+            }
         } else {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
-            startActivity(intent);
-            super.onBackPressed();
+            getSupportFragmentManager().popBackStack();
         }
     }
 
-    //fragment transaction
-    private void setFragment(Fragment fragment){
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, fragment, TAG);
-        ft.addToBackStack(null);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
-    }
 
     @Override
     public void openLoginActivity() {
@@ -148,6 +153,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void openMainFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, OwnerSupplierItemFragment.newInstance(), TAG_MAIN)
@@ -156,6 +162,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void openOrdersFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, OwnerOrdersFragment.newInstance(), TAG_ORDERS)
@@ -164,6 +171,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void openBasketFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, BasketProvidersFragment.newInstance(), TAG_BASKET)
@@ -172,6 +180,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void openProfileFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, ProfileFragment.newInstance(), TAG_PROFILE)
@@ -180,6 +189,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void openConsignmentFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, OwnerConsignmentFragment.newInstance(), TAG_CONSIGNMENT)

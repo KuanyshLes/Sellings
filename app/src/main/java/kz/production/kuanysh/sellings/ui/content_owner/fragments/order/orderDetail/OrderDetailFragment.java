@@ -42,6 +42,9 @@ import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.
  */
 public class OrderDetailFragment extends BaseFragment implements OrderDetailMvpView {
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     OrderDetailPresenter<OrderDetailMvpView> mPresenter;
 
@@ -141,12 +144,12 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailMvpV
 
     @Override
     public void openOrdersFragment() {
-        getActivity().getSupportFragmentManager().popBackStack("OwnerOrders",
-                FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getActivity().getSupportFragmentManager().popBackStack();
 
         ordersFragment=new OwnerOrdersFragment();
         fragmentTransaction= ((AppCompatActivity)getActivity()).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.content_frame,ordersFragment, TAG).commit();
+
 
 
     }

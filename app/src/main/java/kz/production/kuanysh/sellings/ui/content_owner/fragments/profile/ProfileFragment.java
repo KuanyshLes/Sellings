@@ -59,6 +59,7 @@ import kz.production.kuanysh.sellings.ui.content_owner.fragments.changecredentia
 import kz.production.kuanysh.sellings.ui.content_owner.fragments.main.main.OwnerSupplierItemFragment;
 import kz.production.kuanysh.sellings.ui.welcomepart.start.StartActivity;
 import kz.production.kuanysh.sellings.utils.AppConstants;
+import kz.production.kuanysh.sellings.utils.rx.AppMessages;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -70,6 +71,9 @@ import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends BaseFragment implements ProfileFragmentMvpView{
+
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
 
     @Inject
     ProfileFragmentPresenter<ProfileFragmentMvpView> mPresenter;
@@ -181,7 +185,7 @@ public class ProfileFragment extends BaseFragment implements ProfileFragmentMvpV
     public void editPro(){
         mPresenter.getMvpView().setVisibility(AppConstants.TAG_EDIT);
         mPresenter.getMvpView().setEnablity(true);
-        mPresenter.getMvpView().showMessage("Tap to change image");
+        mPresenter.getMvpView().showMessage(AppMessages.CHANGE_IMAGE);
     }
 
     @OnClick(R.id.supplier_profile_card_password)
@@ -365,8 +369,9 @@ public class ProfileFragment extends BaseFragment implements ProfileFragmentMvpV
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.content_frame, changeInfoFragment, TAG_MAIN).commit();
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .hide(this)
+                .add(R.id.content_frame, changeInfoFragment, TAG_MAIN).commit();
     }
 
     @Override
@@ -386,7 +391,7 @@ public class ProfileFragment extends BaseFragment implements ProfileFragmentMvpV
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         //set size
         dialog.getWindow().setLayout((int)(displayRectangle.width() *
-                0.84f), (int)(displayRectangle.height() * 0.24f));
+                0.84f), (int)(displayRectangle.height() * 0.20f));
 
 
         TextView ok=(TextView)mView.findViewById(R.id.dialog_exit_ok);
@@ -417,36 +422,11 @@ public class ProfileFragment extends BaseFragment implements ProfileFragmentMvpV
             File f = new File(filePath);  //
             uriImage = Uri.fromFile(f);
 
-            final InputStream inputStream;
-            try {
-                inputStream = getActivity().getContentResolver().openInputStream(uriImage);
-                Bitmap imageMap = BitmapFactory.decodeStream(inputStream);
-                profilePhoto.setImageBitmap(imageMap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-
-            //uriImage=image.
+            Glide.with(getActivity()).load(filePath).into(profilePhoto);
 
         }
     }
-    public static String getPath(Context context, Uri uri ) {
-        String result = null;
-        String[] proj = { MediaStore.Images.Media.DATA };
-        Cursor cursor = context.getContentResolver( ).query( uri, proj, null, null, null );
-        if(cursor != null){
-            if ( cursor.moveToFirst( ) ) {
-                int column_index = cursor.getColumnIndexOrThrow( proj[0] );
-                result = cursor.getString( column_index );
-            }
-            cursor.close( );
-        }
-        if(result == null) {
-            result = "Not found";
-        }
-        return result;
-    }
+
 
     @Override
     protected void setUp(View view) {

@@ -42,6 +42,9 @@ import static kz.production.kuanysh.sellings.ui.content_suppiler.activity.Suppli
  */
 public class SupplierCategoryFragment extends BaseFragment implements SupplierCategoryMvpView {
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     SupplierCategoryPresenter<SupplierCategoryMvpView> mPresenter;
 
@@ -149,7 +152,7 @@ public class SupplierCategoryFragment extends BaseFragment implements SupplierCa
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         //set size
         dialog.getWindow().setLayout((int)(displayRectangle.width() *
-                0.84f), (int)(displayRectangle.height() * 0.28f));
+                0.84f), (int)(displayRectangle.height() * 0.26f));
 
 
         TextView title=(TextView) mView.findViewById(R.id.dialog_category_title);
@@ -160,13 +163,14 @@ public class SupplierCategoryFragment extends BaseFragment implements SupplierCa
         if(status==2){
             title.setText("Изменения категории");
             dialog_intended_add.setText("Изменить");
+            dialog_intended_name.setText(itemList.get(id).getTitle());
         }
 
         dialog_intended_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(status==2){
-                    mPresenter.onEditClick(id,dialog_intended_name.getText().toString());
+                    mPresenter.onEditClick(itemList.get(id).getId(),dialog_intended_name.getText().toString());
                     dialog.dismiss();
                 }else{
                     mPresenter.addCategoryClick(dialog_intended_name.getText().toString());
@@ -194,7 +198,7 @@ public class SupplierCategoryFragment extends BaseFragment implements SupplierCa
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         //set size
         dialog.getWindow().setLayout((int)(displayRectangle.width() *
-                0.84f), (int)(displayRectangle.height() * 0.28f));
+                0.84f), (int)(displayRectangle.height() * 0.22f));
 
 
         TextView title=(TextView) mView.findViewById(R.id.dialog_category_title);
@@ -229,8 +233,9 @@ public class SupplierCategoryFragment extends BaseFragment implements SupplierCa
         supplierSubcategoryFragment.setArguments(bundle);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.supplier_content_frame, supplierSubcategoryFragment, SUPPLIER_TAG_GOODS)
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .hide(this)
+                .add(R.id.supplier_content_frame, supplierSubcategoryFragment, SUPPLIER_TAG_GOODS)
                 .commit();
 
     }

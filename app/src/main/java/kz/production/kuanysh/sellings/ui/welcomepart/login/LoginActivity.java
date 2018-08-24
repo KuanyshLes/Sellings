@@ -2,22 +2,17 @@ package kz.production.kuanysh.sellings.ui.welcomepart.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.accountkit.Account;
-import com.facebook.accountkit.AccountKit;
-import com.facebook.accountkit.AccountKitCallback;
-import com.facebook.accountkit.AccountKitError;
 import com.facebook.accountkit.AccountKitLoginResult;
-import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
+import com.santalu.widget.MaskEditText;
 
 import javax.inject.Inject;
 
@@ -31,7 +26,6 @@ import kz.production.kuanysh.sellings.ui.base.BaseActivity;
 import kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity;
 import kz.production.kuanysh.sellings.R;
 import kz.production.kuanysh.sellings.ui.content_suppiler.activity.SupplierActivity;
-import kz.production.kuanysh.sellings.ui.welcomepart.registration.RegistrationPhoneActivity;
 
 public class LoginActivity extends BaseActivity implements LoginMvpView {
 
@@ -39,7 +33,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     LoginPresenter<LoginMvpView> mPresenter;
 
     @BindView(R.id.login_phone_number)
-    EditText phone;
+    MaskEditText phone;
 
     @BindView(R.id.login_password)
     EditText password;
@@ -71,11 +65,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
         mPresenter.onAttach(LoginActivity.this);
 
+
     }
 
     @Override
     protected void setUp() {
-
 
     }
 
@@ -83,11 +77,14 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     public void enter(){
         if(getIntent().getStringExtra(StartActivity.TAG_ENTER_AS)!=null){
             if(getIntent().getStringExtra(StartActivity.TAG_ENTER_AS).equals(StartActivity.TAG_OWNER)){
-                mPresenter.onLoginAsOwnerClick(phone.getText().toString().trim(),
+                mPresenter.onLoginAsOwnerClick(phone.getRawText().toString().trim(),
                   password.getText().toString().trim());
+                Log.d("phone", "enter: "+phone.getRawText().toString().trim());
 
             }else {
-                mPresenter.onLoginAsSupplierClick(phone.getText().toString().trim(),password.getText().toString().trim());
+                mPresenter.onLoginAsSupplierClick(phone.getRawText().toString().trim(),password.getText().toString().trim());
+                Log.d("phone", "enter: "+phone.getRawText().toString().trim());
+
             }
         }
 

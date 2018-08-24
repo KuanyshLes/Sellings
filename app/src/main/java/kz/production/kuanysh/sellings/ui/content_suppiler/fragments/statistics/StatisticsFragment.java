@@ -110,7 +110,7 @@ public class StatisticsFragment extends BaseFragment implements StatisticsMvpVie
 
     @Override
     protected void setUp(View view) {
-        mPresenter.onViewPrepared();
+        mPresenter.onViewPrepared(getActivity());
     }
 
     @Override

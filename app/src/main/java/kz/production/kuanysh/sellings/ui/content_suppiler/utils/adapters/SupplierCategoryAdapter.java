@@ -86,7 +86,7 @@ public class SupplierCategoryAdapter extends RecyclerView.Adapter<SupplierCatego
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mPresenter.getMvpView().openDialog(categoryItemList.get(i).getId(),2);
+               mPresenter.getMvpView().openDialog(i,2);
             }
         });
 

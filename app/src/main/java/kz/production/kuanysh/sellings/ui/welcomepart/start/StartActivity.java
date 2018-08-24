@@ -64,10 +64,8 @@ public class StartActivity extends BaseActivity implements StartMvpView{
     protected void setUp() {
         if(mPresenter.getDataManager().getCurrentUserType()== AppConstants.USER_TYPE_OWNER){
             mPresenter.getMvpView().openMainActivity();
-            mPresenter.getMvpView().showMessage("owner logged in");
         }else if(mPresenter.getDataManager().getCurrentUserType()==AppConstants.USER_TYPE_SUPPLIER){
             mPresenter.getMvpView().openSupplierActivity();
-            mPresenter.getMvpView().showMessage("supplier logged in");
         }
 
     }

@@ -41,6 +41,9 @@ import static kz.production.kuanysh.sellings.ui.content_owner.main.MainActivity.
  */
 public class SupplierProductFragment extends BaseFragment implements SupplierProductMvpView{
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     SupplierProductPresenter<SupplierProductMvpView> mPresenter;
 
@@ -103,9 +106,7 @@ public class SupplierProductFragment extends BaseFragment implements SupplierPro
 
     @OnClick(R.id.supplier_product_toolbar_back)
     public void goProviders() {
-        mainFragment = new OwnerSupplierItemFragment();
-        fragmentTransaction = ((AppCompatActivity) getActivity()).getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, mainFragment, TAG).commit();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
 
@@ -132,9 +133,9 @@ public class SupplierProductFragment extends BaseFragment implements SupplierPro
         bundle.putString(OwnerSupplierItemFragment.USER_NAME_KEY, USER_NAME);
         supplierProductSubcategoryFragment.setArguments(bundle);
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, supplierProductSubcategoryFragment, TAG);
-        ft.addToBackStack(null);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.add(R.id.content_frame, supplierProductSubcategoryFragment, TAG);
+        ft.addToBackStack(TAG_FRAGMENT_STACK);
+        ft.hide(this);
         ft.commit();
     }
 

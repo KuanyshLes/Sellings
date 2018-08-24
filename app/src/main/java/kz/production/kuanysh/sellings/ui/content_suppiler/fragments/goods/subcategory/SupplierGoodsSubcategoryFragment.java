@@ -40,6 +40,9 @@ import static kz.production.kuanysh.sellings.ui.content_suppiler.activity.Suppli
 
 public class SupplierGoodsSubcategoryFragment extends BaseFragment implements SupplierGoodsSubcategoryMvpView {
 
+    public final String TAG_FRAGMENT_STACK=getClass().getSimpleName();
+
+
     @Inject
     SupplierGoodsSubcategoryPresenter<SupplierGoodsSubcategoryMvpView> mPresenter;
 
@@ -129,11 +132,11 @@ public class SupplierGoodsSubcategoryFragment extends BaseFragment implements Su
 
     @Override
     public void openCategory() {
-        getActivity().getSupportFragmentManager()
+        getActivity().getSupportFragmentManager().popBackStack();
+       /* getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
                 .replace(R.id.supplier_content_frame, SupplierCategoryFragment.newInstance(), SUPPLIER_TAG_GOODS)
-                .commit();
+                .commit();*/
     }
 
     @Override
@@ -164,7 +167,7 @@ public class SupplierGoodsSubcategoryFragment extends BaseFragment implements Su
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         //set size
         dialog.getWindow().setLayout((int)(displayRectangle.width() *
-                0.84f), (int)(displayRectangle.height() * 0.28f));
+                0.84f), (int)(displayRectangle.height() * 0.26f));
 
         TextView title=(TextView) mView.findViewById(R.id.dialog_category_title);
         title.setText("Новая сабкатегория");
@@ -174,6 +177,7 @@ public class SupplierGoodsSubcategoryFragment extends BaseFragment implements Su
         if(status==2){
             title.setText("Изменения сабкатегории");
             dialog_intended_add.setText("Изменить");
+            dialog_intended_name.setText(itemList.get(id).getTitle());
         }
 
         dialog_intended_add.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +185,7 @@ public class SupplierGoodsSubcategoryFragment extends BaseFragment implements Su
             public void onClick(View v) {
                 if(status==2){
                     dialog.dismiss();
-                    mPresenter.onEditClick(id,dialog_intended_name.getText().toString(),String.valueOf(CATEGORY_ID));
+                    mPresenter.onEditClick(itemList.get(id).getId(),dialog_intended_name.getText().toString(),String.valueOf(CATEGORY_ID));
                 }else {
                     dialog.dismiss();
                     mPresenter.onSendAddSubClick(String.valueOf(CATEGORY_ID),dialog_intended_name.getText().toString());
@@ -203,8 +207,9 @@ public class SupplierGoodsSubcategoryFragment extends BaseFragment implements Su
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.supplier_content_frame, supplierGoodsFragment, SUPPLIER_TAG_GOODS)
+                .addToBackStack(TAG_FRAGMENT_STACK)
+                .hide(this)
+                .add(R.id.supplier_content_frame, supplierGoodsFragment, SUPPLIER_TAG_GOODS)
                 .commit();
     }
 
@@ -225,7 +230,7 @@ public class SupplierGoodsSubcategoryFragment extends BaseFragment implements Su
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         //set size
         dialog.getWindow().setLayout((int)(displayRectangle.width() *
-                0.84f), (int)(displayRectangle.height() * 0.28f));
+                0.84f), (int)(displayRectangle.height() * 0.22f));
 
 
         TextView title=(TextView) mView.findViewById(R.id.dialog_category_title);

@@ -43,7 +43,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="3.0"
                 android:gravity="left|center"
-                android:text="Apple"
                 android:textColor="#161616"
                 android:textSize="18sp" />
             <LinearLayout
@@ -59,15 +58,15 @@
                     android:textSize="16sp"
                     android:gravity="top|left"
                     android:text="до" />
+
                 <TextView
                     android:id="@+id/supplier_consignment_item_time"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="9"
-                    android:paddingLeft="2dp"
                     android:gravity="top|left"
-                    android:textSize="16sp"
-                    android:text="21.01.2018" />
+                    android:paddingLeft="2dp"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,10 +77,9 @@
 
                 <TextView
                     android:id="@+id/supplier_consignment_item_price"
-                    android:layout_weight="100"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="1600тг"
+                    android:layout_weight="100"
                     android:gravity="left|top"
                     android:textColor="@color/colorRedPrice"
                     android:textSize="17sp" />
